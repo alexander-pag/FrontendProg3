@@ -1,0 +1,66 @@
+
+<div id="popup" class="hidden fixed inset-0 flex items-center justify-center" style="background-color: rgba(0,0,0,0.3);">
+  <div class="max-w-lg p-8 sm:pb-4 bg-white rounded shadow-lg text-center sm:text-left">
+
+      <h3 class="text-xl sm:text-2xl font-semibold mb-6 flex flex-col sm:flex-row items-center">
+          <div class="bg-blue-200 p-2 rounded-full flex items-center mb-4 sm:mb-0 sm:mr-2">
+              <svg class="text-blue-800 inline-block w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+              </svg>
+          </div>
+          <span id="title"></span>
+      </h3>
+
+      <section id="content" class="text-left"></section>
+
+      <div class="mt-8 pt-8 sm:pt-4 border-t -mx-8 px-8 flex flex-col sm:flex-row justify-end leading-relaxed">
+          <button id="accept" class="font-bold mt-4 sm:mt-0 sm:ml-4 px-8 py-3 sm:py-2 rounded bg-blue-700 text-gray-100 hover:bg-blue-900 transition duration-300 text-center">Ok</button>
+      </div>
+  </div>
+</div> 
+
+<div class="mx-auto w-full max-w-md">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" [formGroup]="form">
+        <h3 class="text-gray-700 text-2xl mb-6 font-bold lg:mb-10 ">Inicio de sesión</h3>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-md font-bold mb-2" for="rol">
+                <span class="text-gray-700">Rol</span>
+                <select  formControlName="rolId" id="seleccionar" class="form-select h-10 block w-full mt-1 rounded">
+                  <option *ngFor="let r of recordList" value="{{r._id}}">{{r.nombre}} </option>
+                </select>
+              </label>
+          </div>
+        <div class="mb-4 lg:mt-8 mt-4">
+        <label class="block text-gray-700 text-md font-bold mb-2" for="username" >
+          Usuario
+        </label>
+        <div *ngIf="GetForm['usuario'].errors && (GetForm['usuario'].dirty || GetForm['usuario'].touched)" class="error">
+           <label>Por favor ingrese un usuario válido</label>
+        </div>
+        <input formControlName="usuario" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
+      </div>
+      <div class="mb-4 lg:mt-8 mt-4">
+        <label class="block text-gray-700 text-md font-bold mb-2" for="username">
+          Contraseña
+        </label>
+        <div *ngIf="GetForm['clave'].errors && (GetForm['clave'].dirty || GetForm['clave'].touched)" class="error">
+            <label>Por favor ingrese una contraseña válida</label>
+         </div>
+        <input formControlName="clave" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="password">
+      </div>
+      <div class="flex items-center justify-between lg:mt-24 mt-12">
+        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+            Olvidó su contraseña?
+          </a>
+        <button id="btn-login" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+        [disabled]="GetForm['usuario'].errors || GetForm['clave'].errors" type='button'
+                        (click)="Login()" name='btn_login'>
+          Ingresar
+        </button>
+      </div>
+    </form>
+  
+    
+
+    
+  </div>
